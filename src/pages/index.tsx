@@ -5,9 +5,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface IResponse {
-  data: {
-    message: string;
+  body: {
+    vehicleInfo: {
+      renavam;
+    };
   };
+  statusCode: number;
 }
 
 export default function Home() {
@@ -15,11 +18,14 @@ export default function Home() {
   const [message, setMessage] = useState("Message inicial");
   useEffect(() => {
     axios
-      .get<IResponse, IResponse>("/api/teste")
+      .get<IResponse>("/api/teste", {
+        params: {
+          plate: "nwk7418",
+        },
+      })
       .then((response) => {
         console.log(response);
-        const message = response.data.message;
-        setMessage(response.data.message);
+        setMessage(response.data.body.vehicleInfo.renavam);
       })
       .catch((error) => {
         console.log(error);
