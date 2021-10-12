@@ -5,4 +5,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp, {
+  i18n: { defaultLocale: "pt", locales: ["pt", "en", "es"] },
+});
