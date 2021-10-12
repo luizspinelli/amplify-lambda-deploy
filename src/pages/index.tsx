@@ -4,14 +4,21 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+interface IResponse {
+  data: {
+    message: string;
+  };
+}
+
 export default function Home() {
   const { t } = useTranslation("home");
   const [message, setMessage] = useState("Message inicial");
   useEffect(() => {
     axios
-      .get("/api/teste")
+      .get<IResponse, IResponse>("/api/teste")
       .then((response) => {
         console.log(response);
+        const message = response.data.message;
         setMessage(response.data.message);
       })
       .catch((error) => {
